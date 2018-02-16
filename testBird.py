@@ -207,10 +207,10 @@ def game(genome, config):
 			
 		output = net.activate(input)
 		
-		# for event in pygame.event.get():
-		# 	if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
-		# 		pygame.quit()
-		# 		sys.exit()
+		for event in pygame.event.get():
+			if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
+				pygame.quit()
+				sys.exit()
 			
 		if output[0]>=0.5:
 			bird.move("UP")
@@ -266,7 +266,7 @@ config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
                          'config')
 
 
-genomeFile = './bestGenomes/2_732.p'
+genomeFile = './bestGenomes/4_1841.p'
 genome = pickle.load(open(genomeFile,'rb'))
 
 fitnessScores = []

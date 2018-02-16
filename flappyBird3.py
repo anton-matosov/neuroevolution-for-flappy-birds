@@ -209,10 +209,10 @@ def game(genome, config):
 			
 		output = net.activate(input)
 		
-		# for event in pygame.event.get():
-		# 	if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
-		# 		pygame.quit()
-		# 		sys.exit()
+		for event in pygame.event.get():
+			if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
+				pygame.quit()
+				sys.exit()
 			
 		if output[0]>=0.5:
 			bird.move("UP")
@@ -272,12 +272,13 @@ stats = neat.StatisticsReporter()
 pop.add_reporter(stats)
 
 winner = pop.run(eval_genomes, 30)
-
 print(winner)
 
 outputDir = './bestGenomes'
+if not os.path.exists(outputDir):
+  os.mkdir(outputDir)
 os.chdir(outputDir)
-serialNo = len(os.listdir(outputDir))+1
+serialNo = len(os.listdir('.'))+1
 outputFile = open(str(serialNo)+'_'+str(int(MAX_FITNESS))+'.p','wb' )
 
 pickle.dump(winner, outputFile)
